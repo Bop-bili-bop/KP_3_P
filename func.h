@@ -21,7 +21,6 @@ double calculate_root(double root_exp, int root_value, double accuracy)
         delta = (1.0 / root_value) * ((root_exp / pow(y, root_value - 1)) - y);
         y = y + delta;
         i++;
-        printf("iteration:%d, delta=%lf, y=%lf\n", i, delta, y);
         }
     while (fabs(delta) >= accuracy);
 
@@ -68,6 +67,51 @@ double val_double_input(const char *prompt)
     return value;
 }
 
+double rootexp_val(int var)
+{
+    double rootexp = 0;
+    switch (var)
+    {
+        case 1:
+            do
+            {
+                rootexp = val_double_input("Please enter root expression x (x > 0):\n");
+                if (rootexp <= 0)
+                {
+                    printf("Invalid input. Please enter a valid number.\n");
+                    rootexp = 0;
+                    clean_input();
+                }
+            }
+            while (rootexp <= 0);
+            return rootexp;
+        case 2:
+            do
+            {
+                rootexp = val_double_input("Please enter root expression x (x != 0):\n");
+                if (rootexp == 0)
+                {
+                    printf("Invalid input. Please enter a valid number.\n");
+                    rootexp = 0;
+                    clean_input();
+                }
+            }
+            while (rootexp == 0);
+            return rootexp;
+        case 3:
+            do
+            {
+                rootexp = val_double_input("Please enter root expression x (x >= 0):\n");
+                if (rootexp < 0)
+                {
+                    printf("Invalid input. Please enter a valid number.\n");
+                }
+            }
+            while (rootexp < 0);
+            return rootexp;
+    }
+
+}
 // Функція для вибору точності
 double set_accuracy()
 {
@@ -87,16 +131,19 @@ double set_accuracy()
             {
                 case 1:
                 {
-                    int decimal_places = val_int_input("Enter the number of decimal places: ");
+                    int decimal_places = val_int_input("Enter the number of decimal places:\n");
                     accuracy = pow(10, decimal_places);  // Вираховуємо точність з кількості знаків
+                    break;
                 }
                 case 2:
                 {
-                    accuracy = val_double_input("Enter the decimal number (e.g., 0.001): ");
+                    accuracy = val_double_input("Enter the decimal number (e.g., 0.001):\n");
+                    break;
                 }
                 case 3:
                 {
-                    accuracy = val_double_input("Enter the accuracy in exponential form (e.g., 1E-3): ");
+                    accuracy = val_double_input("Enter the accuracy in exponential form (e.g., 1E-3):\n");
+                    break;
                 }
                 default:
                 {
