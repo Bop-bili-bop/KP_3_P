@@ -34,11 +34,11 @@ int main()
         }
 
         epsilon = set_accuracy();
-
         y = calculate_root(x, k, epsilon);
         printf("The root with k value and x expression is %.10f (with accuracy = %e)\n", y, epsilon);
         printf("\nPress [Q] to quit, any other key to continue...\n");
         q = getch();
+
     }
     while (q != 'q' && q != 'Q');
     return 0;
